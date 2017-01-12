@@ -11,11 +11,12 @@
     class="multiselect">
       <div @mousedown.prevent="toggle()" class="multiselect__select"></div>
       <div ref="tags" class="multiselect__tags">
+
         <span
           v-for="option of visibleValue"
           onmousedown="event.preventDefault()"
           class="multiselect__tag">
-            <span v-text="getOptionLabel(option)"></span>
+            <span v-text="limitLabelDisplay(getOptionLabel(option))"></span>
             <i
               aria-hidden="true"
               tabindex="1"
@@ -38,6 +39,7 @@
           v-if="searchable"
           :value="search"
           :disabled="disabled"
+          :class="{'multiselect__input__shift' : internalValue && internalValue.length > 0 }"
           @input="updateSearch($event.target.value)"
           @focus.prevent="activate()"
           @blur.prevent="deactivate()"
@@ -277,6 +279,11 @@ fieldset[disabled] .multiselect {
   touch-action: manipulation;
 }
 
+.multiselect__input__shift {
+  position: absolute !important;
+  left: -10000px;
+}
+
 .multiselect {
   box-sizing: content-box;
   display: block;
@@ -366,7 +373,7 @@ fieldset[disabled] .multiselect {
   display: inline-block;
   padding: 4px 26px 4px 10px;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-right: 0;
   color: #fff;
   line-height: 1;
   background: #41B883;

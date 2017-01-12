@@ -400,6 +400,14 @@ module.exports = {
       if (option.isTag) return option.label
       return this.customLabel(option, this.label) || ''
     },
+
+    limitLabelDisplay (label) {
+      if (label.length <= 10) {
+        return label
+      } else {
+        return label.slice(0, 8) + '...'
+      }
+    },
     /**
      * Add the given option to the list of selected options
      * or sets the option as the selected option.
