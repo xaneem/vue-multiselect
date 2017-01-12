@@ -80,6 +80,7 @@
                 :data-deselect="deselectLabelText"
                 class="multiselect__option">
                   <slot name="option" :option="option" :search="search">
+                    <input type="checkbox" :checked="isSelected(option)">
                     <span>{{ getOptionLabel(option) }}</span>
                   </slot>
               </span>
@@ -494,6 +495,32 @@ fieldset[disabled] .multiselect {
   display: block;
 }
 
+.multiselect__element input[type="checkbox"] {
+  margin-right: 5px;
+  appearance: none;
+  position: relative;
+}
+
+.multiselect__element input[type="checkbox"]:after {
+  border: solid 1px #808080;
+  content: "";
+  display: block;
+  position: relative;
+  top: 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+  transition: 240ms;
+}
+
+.multiselect__element input[type="checkbox"]:checked:before {
+  /* Code to add check mark */
+}
+
+.multiselect__element input[type="checkbox"]:checked:after {
+  background-color: #666666;
+}
+
 .multiselect__option {
   display: block;
   padding: 12px;
@@ -517,21 +544,20 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--highlight {
-  background: #41B883;
+  background: #f5fafd;
   outline: none;
-  color: white;
+  color: #000;
 }
 
 .multiselect__option--highlight:after {
   content: attr(data-select);
-  background: #41B883;
-  color: white;
+  background: #f5fafd;
+  color: #000;
 }
 
 .multiselect__option--selected {
-  background: #F3F3F3;
+  background: #f5fafd;
   color: #35495E;
-  font-weight: bold;
 }
 
 .multiselect__option--selected:after {
@@ -540,14 +566,14 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--selected.multiselect__option--highlight {
-  background: #FF6A6A;
-  color: #fff;
+  background: #f5fafd;
+  color: #000;
 }
 
 .multiselect__option--selected.multiselect__option--highlight:after {
-  background: #FF6A6A;
+  background: #f5fafd;
   content: attr(data-deselect);
-  color: #fff;
+  color: #000;
 }
 
 .multiselect--disabled {
