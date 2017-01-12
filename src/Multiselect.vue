@@ -10,7 +10,7 @@
     @keyup.esc="deactivate()"
     class="multiselect">
       <div @mousedown.prevent="toggle()" class="multiselect__select"></div>
-      <div ref="tags" class="multiselect__tags">
+      <div ref="tags" class="multiselect__tags" :class="{'multiselect__active': isOpen}">
 
         <span
           v-for="option of visibleValue"
@@ -274,8 +274,6 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__input__shift {
-  position: absolute !important;
-  left: -10000px;
 }
 
 .multiselect {
@@ -360,6 +358,10 @@ fieldset[disabled] .multiselect {
   border-radius: 0;
   border-bottom: 1px solid #E8E8E8;
   background: #fff;
+}
+
+.multiselect__tags.multiselect__active {
+  box-shadow: inset 0 -2px 0 #db3725;
 }
 
 .multiselect__tag {
