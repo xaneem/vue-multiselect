@@ -357,8 +357,8 @@ fieldset[disabled] .multiselect {
   min-height: 40px;
   display: block;
   padding: 8px 40px 0 8px;
-  border-radius: 5px;
-  border: 1px solid #E8E8E8;
+  border-radius: 0;
+  border-bottom: 1px solid #E8E8E8;
   background: #fff;
 }
 
@@ -575,7 +575,7 @@ fieldset[disabled] .multiselect {
 
 .multiselect--disabled .multiselect__current,
 .multiselect--disabled .multiselect__select {
-  background: #ededed;
+  background: transparent;
   color: #a6a6a6;
 }
 
