@@ -17,16 +17,9 @@
           onmousedown="event.preventDefault()"
           class="multiselect__tag">
             <span v-text="limitLabelDisplay(getOptionLabel(option))"></span>
-            <i
-              aria-hidden="true"
-              tabindex="1"
-              @keydown.enter.prevent="removeElement(option)"
-              @mousedown.prevent="removeElement(option)"
-              class="multiselect__tag-icon">
-            </i>
         </span>
         <template v-if="internalValue && internalValue.length > limit">
-          <strong v-text="limitText(internalValue.length - limit)"></strong>
+          <span v-text="limitText(internalValue.length - limit)"></span>
         </template>
         <transition name="multiselect__loading">
           <div v-show="loading" class="multiselect__spinner"></div>
@@ -372,12 +365,11 @@ fieldset[disabled] .multiselect {
 .multiselect__tag {
   position: relative;
   display: inline-block;
-  padding: 4px 26px 4px 10px;
+  padding: 4px 6px;
   border-radius: 5px;
   margin-right: 0;
-  color: #fff;
+  color: #000;
   line-height: 1;
-  background: #41B883;
   margin-bottom: 8px;
   white-space: nowrap;
 }
