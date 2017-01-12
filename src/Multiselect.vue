@@ -73,7 +73,7 @@
                 :data-deselect="deselectLabelText"
                 class="multiselect__option">
                   <slot name="option" :option="option" :search="search">
-                    <input type="checkbox" :checked="isSelected(option)">
+                    <input type="checkbox" :checked="isSelected(option)" v-if="multiple">
                     <span>{{ getOptionLabel(option) }}</span>
                   </slot>
               </span>
@@ -580,8 +580,8 @@ fieldset[disabled] .multiselect {
 }
 
 .multiselect__option--disabled {
-  background: #ededed;
-  color: #a6a6a6;
+  background: #F5F5F5;
+  color: #000;
   cursor: text;
   pointer-events: none;
 }
