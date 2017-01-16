@@ -32,7 +32,6 @@
           v-if="searchable"
           :value="search"
           :disabled="disabled"
-          :class="{'multiselect__input__shift' : internalValue && internalValue.length > 0 }"
           @input="updateSearch($event.target.value)"
           @focus.prevent="activate()"
           @blur.prevent="deactivate()"
@@ -74,7 +73,7 @@
                 class="multiselect__option">
                   <slot name="option" :option="option" :search="search">
                     <input type="checkbox" :checked="isSelected(option)" v-if="multiple">
-                    <span>{{ getOptionLabel(option) }}</span>
+                    <span :class="{'has-checkbox': multiple}">{{ getOptionLabel(option) }}</span>
                   </slot>
               </span>
               <span
@@ -269,11 +268,14 @@ fieldset[disabled] .multiselect {
 .multiselect__input,
 .multiselect__single {
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
   touch-action: manipulation;
+  cursor: pointer;
 }
 
-.multiselect__input__shift {
+.multiselect ::-webkit-input-placeholder {
+  color: #2F2F2F;
+  font-weight: normal;
 }
 
 .multiselect {
@@ -395,7 +397,7 @@ fieldset[disabled] .multiselect {
 .multiselect__tag-icon:after {
   content: "×";
   color: #266d4d;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .multiselect__tag-icon:focus,
@@ -489,30 +491,51 @@ fieldset[disabled] .multiselect {
   display: block;
 }
 
+.multiselect__element span.has-checkbox {
+  padding-left: 25px;
+}
+
 .multiselect__element input[type="checkbox"] {
   margin-right: 5px;
+
   appearance: none;
-  position: relative;
+  pointer-events: none;
+  border: none;
+
+  top: 8px;
+  left: 15px;
+  position: absolute;
 }
 
 .multiselect__element input[type="checkbox"]:after {
-  border: solid 1px #808080;
   content: "";
   display: block;
-  position: relative;
-  top: 3px;
-  width: 15px;
-  height: 15px;
+
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border: 1px solid #666;
   border-radius: 2px;
   transition: 240ms;
 }
 
 .multiselect__element input[type="checkbox"]:checked:before {
-  /* Code to add check mark */
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  display: table;
+  width: 5px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-top-width: 0;
+  border-left-width: 0;
+  transform: rotate(45deg);
 }
 
 .multiselect__element input[type="checkbox"]:checked:after {
-  background-color: #666666;
+  background-color: #F44336;
+  border: 1px solid #DC3C30;
 }
 
 .multiselect__option {
